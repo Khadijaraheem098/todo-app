@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth & Todo System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="authBox" class="container-box">
+        
+        <div class="tabs">
+            <button id="loginTabBtn" class="active-tab" onclick="toggleTab('login')">Login</button>
+            <button id="signupTabBtn" onclick="toggleTab('signup')">Sign Up</button>
+        </div>
+
+        <h2 id="authTitle">User Login</h2>
+
+        
+        <div class="input-group">
+            <input type="email" id="authEmail" placeholder="Enter Email">
+            <input type="password" id="authPassword" placeholder="Enter Password">
+            <button id="authSubmitBtn" onclick="handleAuth()">Sign In</button>
+        </div>
+    </div>
+
+
+    <div id="todoBox" class="container-box hidden">
+        <div class="todo-header">
+            <h2>My Todo List</h2>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+        
+        <p class="user-welcome">Logged in as: <span id="currentUserLabel"></span></p>
+
+        
+        <div class="input-group row">
+            <input type="text" id="taskInput" placeholder="Add a new task...">
+            <button onclick="addTask()">Add Task</button>
+        </div>
+
+        
+        <ul id="taskList"></ul>
+
+        
+        <button class="clear-btn" onclick="clearAllTasks()">Clear All Tasks</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
