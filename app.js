@@ -1,111 +1,107 @@
-var registeredUsers = [];
-var currentTab = 'login'; 
-var loggedInUserEmail = "";
+import { database } from "./config.js"
+import { set,ref,push } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-database.js";
+var addTask=document.getElementById("add")
 
+addTask.addEventListener("click",function() {
+            var input = document.getElementById("taskInput");
+            var task = input.value.trim();
 
-var authBox = document.getElementById('authBox');
-var todoBox = document.getElementById('todoBox');
-var authTitle = document.getElementById('authTitle');
-var authEmailInput = document.getElementById('authEmail');
-var authPasswordInput = document.getElementById('authPassword');
-var authSubmitBtn = document.getElementById('authSubmitBtn');
-var currentUserLabel = document.getElementById('currentUserLabel');
-var taskInput = document.getElementById('taskInput');
-var taskList = document.getElementById('taskList');
+            if (task === "") {
+                alert("Please enter a task!");
+                return;
+            }
 
+            var li = document.createElement("li");
+            li.textContent = task;
 
-function toggleTab(targetMode) {
-    currentTab = targetMode;
-    
-    
-    authEmailInput.value = "";
-    authPasswordInput.value = "";
+            var btn = document.createElement("button");
+            btn.textContent = "Delete";
+            btn.className = "delete-btn";
 
-    
-    document.getElementById('loginTabBtn').className = (targetMode === 'login') ? 'active-tab' : '';
-    document.getElementById('signupTabBtn').className = (targetMode === 'signup') ? 'active-tab' : '';
+            btn.onclick = function() {
+                li.remove();
+            };
 
-    if (targetMode === 'login') {
-        authTitle.innerText = "User Login";
-        authSubmitBtn.innerText = "Sign In";
-    } else {
-        authTitle.innerText = "Create Account";
-        authSubmitBtn.innerText = "Register";
-    }
-}
+            li.appendChild(btn);
+            document.getElementById("taskList").appendChild(li);
 
-
-function handleAuth() {
-    var email = authEmailInput.value.trim();
-    var password = authPasswordInput.value.trim();
-
-    if (email === "" || password === "") {
-        alert("Please fill in all layout text fields.");
-        return;
-    }
-
-    if (currentTab === 'signup') {
-        
-        var userExists = registeredUsers.some(u => u.email === email);
-        if (userExists) {
-            alert("This user account profile is already registered!");
-            return;
-        }
-
-        
-        registeredUsers.push({ email: email, password: password });
-        alert("Registration Successful! Now please log in.");
-        toggleTab('login');
-    } else {
-        
-        var validUser = registeredUsers.find(u => u.email === email && u.password === password);
-        
-        if (validUser) {
-            loggedInUserEmail = email;
+            input.value = "";
             
-            authBox.classList.add('hidden');
-            todoBox.classList.remove('hidden');
-            currentUserLabel.innerText = loggedInUserEmail;
-        } else {
-            alert("Invalid email account formatting or wrong password combination.");
-        }
-    }
+        })
+
+
+     window.deleteAll=function() {
+            document.getElementById("taskList").innerHTML = "";
 }
 
+// function addTask() {
+//     let input = document.getElementById("taskInput");
+//     let task = input.value.trim();
 
-function logout() {
-    loggedInUserEmail = "";
-    taskList.innerHTML = ""; 
-    todoBox.classList.add('hidden');
-    authBox.classList.remove('hidden');
-    toggleTab('login');
+//     if (task === "") {
+//         alert("Please enter a task!");
+//         return;
+//     }
+
+//     let li = document.createElement("li");
+//     let span = document.createElement("span");
+//     span.textContent = task;
+
+//     let deleteBtn = document.createElement("button");
+//     deleteBtn.textContent = "Delete";
+//     deleteBtn.className = "delete-btn";
+
+//     deleteBtn.onclick = function () {
+//         li.remove();
+//     };
+
+//     li.appendChild(span);
+//     li.appendChild(deleteBtn);
+
+//     document.getElementById("taskList").appendChild(li);
+
+//     input.value = "";
+// }
+
+function deleteAll() {
+    document.getElementById("taskList").innerHTML = "";
 }
 
+       
+function showResult() {
+     var scoped=ref(database,`inputs`) ;
+     var newR=push(scoped);
+     var id=newR.key;
+   
 
-function addTask() {
-    var textValue = taskInput.value.trim();
-    if (textValue === "") {
-        alert("Cannot add a blank execution task node row!");
-        return;
-    }
-
-
-    var li = document.createElement('li');
-    li.innerText = textValue;
-
-    var deleteBtn = document.createElement('button');
-    deleteBtn.innerText = "Delete";
-    deleteBtn.className = "delete-btn";
-    deleteBtn.onclick = function() {
-        li.remove();
-    };
-
-    li.appendChild(deleteBtn);
-    taskList.appendChild(li);
+     var object={ 
+        k:id,
+        user:input.value
+      
+     }
+     set(newR,object)
+     .then(() => { 
+       alert("hi")
+     })
+     .catch((error )=>{ 
+        console.log(error);
+        
+     })
+     
     
-    taskInput.value = ""; 
 }
 
-function clearAllTasks() {
-    taskList.innerHTML = "";
-}
+// retryBtn.addEventListener("click", () => {
+//     currentQuestionIndex = 0;
+//     score = 0;
+//     resultScreen.classList.add("hidden");   
+//     quizScreen.classList.remove("hidden");
+//     loadQuestion();
+// });
+
+
+// loadQuestion();
+
+
+ 
+    

@@ -3,50 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auth & Todo System</title>
-    <link rel="stylesheet" href="style.css">
+    <title>sinap pag</title>
 </head>
 <body>
-
-    <div id="authBox" class="container-box">
-        
-        <div class="tabs">
-            <button id="loginTabBtn" class="active-tab" onclick="toggleTab('login')">Login</button>
-            <button id="signupTabBtn" onclick="toggleTab('signup')">Sign Up</button>
-        </div>
-
-        <h2 id="authTitle">User Login</h2>
-
-        
-        <div class="input-group">
-            <input type="email" id="authEmail" placeholder="Enter Email">
-            <input type="password" id="authPassword" placeholder="Enter Password">
-            <button id="authSubmitBtn" onclick="handleAuth()">Sign In</button>
-        </div>
+     <body style="background-color: black; ">
+    <div style="background-color: black; color: aqua; padding: 30px; text-align: center; display: flex; justify-content:center;  ">
+    <div style="border: 1px solid ;  position: fixed; padding: 15px; margin: 100px ; border-radius: 10px ;   " >
+        <h1>sinap</h1>
+       <div>
+        <label style="gap: 10px;" for="">Name :</label>
+        <input id="Name" type="text">
+    </div>
+    <div>
+        <label  for="">Password :</label>
+        <input id="password" type="text">
+    </div>
+    <div>
+        <label for="">Email :</label>
+        <input id="Email" type="text">
     </div>
 
-
-    <div id="todoBox" class="container-box hidden">
-        <div class="todo-header">
-            <h2>My Todo List</h2>
-            <button class="logout-btn" onclick="logout()">Logout</button>
-        </div>
-        
-        <p class="user-welcome">Logged in as: <span id="currentUserLabel"></span></p>
-
-        
-        <div class="input-group row">
-            <input type="text" id="taskInput" placeholder="Add a new task...">
-            <button onclick="addTask()">Add Task</button>
-        </div>
-
-        
-        <ul id="taskList"></ul>
-
-        
-        <button class="clear-btn" onclick="clearAllTasks()">Clear All Tasks</button>
+    <div  style="background-color: black; text-align: center; padding: 15px;">
+        <button style="background-color:black; color:#00FFFF; width: 100px; font-size: large; padding: 10px; " id="sinap">Sinap</button>  
     </div>
+    </div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="config.js" type="module"></script>
+    <script src="sinap.js" type="module"></script>
+    <script src="login.js" type="module"></script>
+    <script src="app.js" type="module"></script> 
 
-    <script src="app.js"></script>
 </body>
 </html>
